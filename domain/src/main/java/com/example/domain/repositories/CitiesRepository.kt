@@ -5,4 +5,5 @@ import io.reactivex.Observable
 
 interface CitiesRepository {
     fun getAllCities(): Observable<List<City>>
+    fun addCity(city: City)
 }
