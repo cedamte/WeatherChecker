@@ -11,7 +11,7 @@ data class FavoriteCity(
                 val cityId: Int? = null,
                 val name: String,
                 val isFavorite: Boolean,
-                val temperatureInKelvin: Float,
+                val temperatureInKelvin: Double,
                 val condition: String,
-                val windSpeed: String,
-                val windDegrees: Float)
+                val windSpeed: Double,
+                val windDegrees: Double)

@@ -14,6 +14,9 @@ import com.example.domain.model.City
 import com.example.domain.model.Forecast
 import com.example.domain.usecase.*
 import com.example.weatherchecker.HomeActivity
+import com.example.weatherchecker.ui.forecast.ForecastActivity
+import com.example.weatherchecker.ui.forecast.di.ForecastModule
+import com.example.weatherchecker.ui.forecast.di.ForecastScope
 import com.example.weatherchecker.ui.home.di.HomeModule
 import com.example.weatherchecker.ui.home.di.HomeScope
 import dagger.Binds
@@ -26,6 +29,10 @@ abstract class BuildersModule {
     @ContributesAndroidInjector(modules = [HomeModule::class])
     @HomeScope
     abstract fun homeActivity(): HomeActivity
+
+    @ContributesAndroidInjector(modules = [ForecastModule::class])
+    @ForecastScope
+    abstract fun forecastActivity(): ForecastActivity
 
     @Binds
     abstract fun bindGetCitiesUseCase(getCitiesUseCaseImpl: GetCitiesUseCaseImpl): GetCitiesUseCase
