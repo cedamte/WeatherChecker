@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 const val RC_HOME_SEARCH = 101
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
