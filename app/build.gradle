@@ -29,6 +29,9 @@ android {
             it.buildConfigField('String', 'API_KEY_OWM', API_KEY_OWM)
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
