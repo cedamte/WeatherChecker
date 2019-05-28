@@ -9,6 +9,7 @@ class ForecastMapper @Inject constructor() : Mapper<Prediction, Forecast> {
         return with(item) {
             Forecast(temperatureInKelvin = main.temp,
                 condition = weather[0].description,
+                time = dt,
                 windSpeed = wind.speed,
                 windDegrees = wind.deg)
         }

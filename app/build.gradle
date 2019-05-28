@@ -69,6 +69,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.room:room-runtime:$room_version"
 
+    //Three-Ten-ABP
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
+
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
