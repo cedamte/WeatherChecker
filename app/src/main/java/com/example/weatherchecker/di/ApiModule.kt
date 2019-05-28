@@ -1,10 +1,12 @@
 package com.example.weatherchecker.di
 
 import android.app.Application
+import com.example.data.api.WeatherApi
 import com.example.weatherchecker.BuildConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -20,9 +22,25 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(cache: Cache): OkHttpClient {
+    fun provideInterceptor(): Interceptor {
+        return Interceptor { chain ->
+            val originalUrl = chain.request().url()
+            val modifiedUrl = originalUrl.newBuilder()
+                .addQueryParameter("appid", BuildConfig.API_KEY_OWM)
+                .build()
+            val newRequest = chain.request().newBuilder()
+                .url(modifiedUrl)
+                .build()
+            chain.proceed(newRequest)
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(cache: Cache, interceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .cache(cache)
+            .addInterceptor(interceptor)
             .build()
     }
 
@@ -36,6 +54,10 @@ class ApiModule {
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideWeatherApi(retrofit: Retrofit): WeatherApi = retrofit.create(WeatherApi::class.java)
 
 
 }
