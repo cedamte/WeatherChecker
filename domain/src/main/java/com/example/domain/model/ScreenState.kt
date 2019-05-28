@@ -8,4 +8,6 @@ sealed class ScreenState {
 
 sealed class HomeScreenState : ScreenState() {
     data class Content(val payload: List<City>): HomeScreenState()
+    object LaunchCitySelection : HomeScreenState()
+    object ShowFavoriteOption : HomeScreenState()
 }
