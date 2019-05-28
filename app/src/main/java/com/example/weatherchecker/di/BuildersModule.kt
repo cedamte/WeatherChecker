@@ -7,6 +7,8 @@ import com.example.data.mapper.FavoriteCityMapper
 import com.example.data.mapper.Mapper
 import com.example.data.model.FavoriteCity
 import com.example.domain.model.City
+import com.example.domain.usecase.AddCityUseCase
+import com.example.domain.usecase.AddCityUseCaseImpl
 import com.example.domain.usecase.GetCitiesUseCase
 import com.example.domain.usecase.GetCitiesUseCaseImpl
 import dagger.Binds
@@ -17,6 +19,9 @@ abstract class BuildersModule {
 
     @Binds
     abstract fun bindGetCitiesUseCase(getCitiesUseCaseImpl: GetCitiesUseCaseImpl): GetCitiesUseCase
+
+    @Binds
+    abstract fun bindAddCityUseCase(addCityUseCaseImpl: AddCityUseCaseImpl): AddCityUseCase
 
     @Binds
     abstract fun bindLocalDataSource(localDataSourceImpl: LocalDataSourceImpl): LocalDataSource
