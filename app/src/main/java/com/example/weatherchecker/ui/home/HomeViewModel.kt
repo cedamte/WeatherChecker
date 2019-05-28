@@ -24,6 +24,12 @@ class HomeViewModel(
     val homeScreenStateObservable: LiveData<ScreenState>
         get() = _homeScreenStateObservable
 
+    fun start() {
+        if ((_homeScreenStateObservable.value is HomeScreenState.Content).not()) {
+            _homeScreenStateObservable.value = null
+        }
+    }
+
     fun getSavedCities() {
         getCitiesUseCase.execute()
             .subscribeOn(Schedulers.io())
@@ -38,7 +44,7 @@ class HomeViewModel(
     }
 
     fun onCitySelected(city: City) {
-
+        _homeScreenStateObservable.value = HomeScreenState.LaunchForecastActivity(city.name)
     }
 
     fun onFavoriteOptionSelected(shouldFavorite: Boolean) {

@@ -11,6 +11,6 @@ class AddCityUseCaseImpl @Inject constructor(private val citiesRepository: Citie
         return Observable.fromCallable {
             citiesRepository.addCity(City(name = name, isFavorite = true))
             ScreenState.Loading(false) as ScreenState }
-            .doOnSubscribe { ScreenState.Loading(true) }
+            .startWith(ScreenState.Loading(true))
     }
 }

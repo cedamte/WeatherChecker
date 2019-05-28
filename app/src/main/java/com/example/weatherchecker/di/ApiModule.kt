@@ -8,9 +8,11 @@ import dagger.Provides
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -22,7 +24,8 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideInterceptor(): Interceptor {
+    @Named("authInterceptor")
+    fun provideAuthInterceptor(): Interceptor {
         return Interceptor { chain ->
             val originalUrl = chain.request().url()
             val modifiedUrl = originalUrl.newBuilder()
@@ -37,10 +40,20 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(cache: Cache, interceptor: Interceptor): OkHttpClient {
+    @Named("loggingInterceptor")
+    fun provideLoggingInterceptor(): Interceptor {
+        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(cache: Cache,
+                            @Named("authInterceptor") authInterceptor: Interceptor,
+                            @Named("loggingInterceptor") loggingInterceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .cache(cache)
-            .addInterceptor(interceptor)
+            .addInterceptor(authInterceptor)
+            .addInterceptor(loggingInterceptor)
             .build()
     }
 

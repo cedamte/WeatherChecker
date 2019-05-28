@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.model.HomeScreenState
 import com.example.domain.model.ScreenState
 import com.example.weatherchecker.databinding.ActivityHomeBinding
+import com.example.weatherchecker.ui.forecast.ForecastActivity
 import com.example.weatherchecker.ui.home.AddCityBottomSheet
 import com.example.weatherchecker.ui.home.CitiesAdapter
 import com.example.weatherchecker.ui.home.HomeViewModel
@@ -24,9 +25,6 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
-
-const val RC_HOME_SEARCH = 101
-const val ADD_CITY_BOTTOM_SHEET_TAG = "add_city"
 
 class HomeActivity : AppCompatActivity() {
 
@@ -48,12 +46,14 @@ class HomeActivity : AppCompatActivity() {
         rvCities.addItemDecoration(DividerItemDecoration(this, layoutManager.orientation))
         rvCities.adapter = citiesAdapter
 
+        homeViewModel.start()
         homeViewModel.homeScreenStateObservable.observe(this, Observer { screenState ->
             when(screenState) {
                 is HomeScreenState.Content -> citiesAdapter.setData(screenState.payload)
                 is HomeScreenState.LaunchCitySelection -> launchCitySelection()
                 is HomeScreenState.ShowFavoriteOption -> showFavoriteOption()
                 is ScreenState.Error -> Toast.makeText(this, screenState.errorMessage, Toast.LENGTH_LONG).show()
+                is HomeScreenState.LaunchForecastActivity -> launchForecastActivity(screenState.name)
             }
         })
 
@@ -85,5 +85,17 @@ class HomeActivity : AppCompatActivity() {
     private fun showFavoriteOption() {
         val addCityBottomSheet = AddCityBottomSheet.newInstance(homeViewModel::onFavoriteOptionSelected)
         addCityBottomSheet.show(supportFragmentManager, ADD_CITY_BOTTOM_SHEET_TAG)
+    }
+
+    private fun launchForecastActivity(name: String) {
+        val intent = Intent(this, ForecastActivity::class.java)
+        intent.putExtra(KEY_NAME, name)
+        startActivity(intent)
+    }
+
+    companion object {
+        const val RC_HOME_SEARCH = 101
+        const val ADD_CITY_BOTTOM_SHEET_TAG = "add_city"
+        const val KEY_NAME = "name"
     }
 }
