@@ -11,3 +11,7 @@ sealed class HomeScreenState : ScreenState() {
     object LaunchCitySelection : HomeScreenState()
     object ShowFavoriteOption : HomeScreenState()
 }
+
+sealed class ForecastScreenState : ScreenState() {
+    data class Content(val payload: List<Forecast>) : ForecastScreenState()
+}
