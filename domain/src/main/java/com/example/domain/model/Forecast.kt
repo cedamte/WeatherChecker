@@ -1,6 +1,6 @@
 package com.example.domain.model
 
-data class Forecast(val temperatureInKelvin: Float = Float.NEGATIVE_INFINITY,
+data class Forecast(val temperatureInKelvin: Double = Double.NEGATIVE_INFINITY,
                     val condition: String = "",
-                    val windSpeed: String = "",
-                    val windDegrees: Float = Float.NEGATIVE_INFINITY)
+                    val windSpeed: Double = Double.NEGATIVE_INFINITY,
+                    val windDegrees: Double = Double.NEGATIVE_INFINITY)
