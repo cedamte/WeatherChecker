@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
+import com.example.domain.model.Forecast
+import com.example.weatherchecker.ui.forecast.ForecastSummary
 import com.squareup.picasso.Picasso
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -36,4 +38,16 @@ fun Int.getReadableTimeFromEpoch(): String {
 fun Double.getCentigradeFromKelvin(): String {
     val numberFormat = DecimalFormat("#0.0")
     return numberFormat.format(this - 273.15)
+}
+
+fun Forecast.toForecastSummary(): ForecastSummary {
+    return with(this) {
+        ForecastSummary(
+            temperature = temperatureInKelvin.getCentigradeFromKelvin(),
+            windDegrees = windDegrees,
+            windSpeed = (windSpeed * 3.6).toString(),
+            condition = condition,
+            date = time.getReadableTimeFromEpoch()
+        )
+    }
 }
