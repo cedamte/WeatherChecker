@@ -21,6 +21,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        buildTypes.each {
+            it.buildConfigField('String', 'BASE_URL', BASE_URL)
+            it.buildConfigField('Long', 'CACHE_SIZE', CACHE_SIZE)
+            it.buildConfigField('String', 'API_KEY_GOOGLE', API_KEY_GOOGLE)
+            it.buildConfigField('String', 'DATABASE_NAME', DATABASE_NAME)
+            it.buildConfigField('String', 'API_KEY_OWM', API_KEY_OWM)
+        }
     }
 }
 
@@ -57,8 +64,12 @@ dependencies {
 
     //Architecture Components
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.room:room-runtime:$room_version"
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    compile project(path: ':data')
+    compile project(path: ':domain')
 }

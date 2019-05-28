@@ -23,7 +23,6 @@ android {
         }
         buildTypes.each {
             it.buildConfigField('String', 'TABLE_NAME', TABLE_NAME)
-            it.buildConfigField('String', 'DATABASE_NAME', DATABASE_NAME)
             it.buildConfigField('int', 'DATABASE_VERSION', DATABASE_VERSION)
         }
     }
