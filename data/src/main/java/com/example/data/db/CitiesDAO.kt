@@ -2,6 +2,7 @@ package com.example.data.db
 
 import androidx.room.*
 import com.example.data.model.FavoriteCity
+import io.reactivex.Flowable
 import io.reactivex.Maybe
 
 @Dao
@@ -14,6 +15,6 @@ interface CitiesDAO {
     fun deleteCity(favoriteCity: FavoriteCity)
 
     @Query("SELECT * FROM cities")
-    fun getAllCities(): Maybe<List<FavoriteCity>>
+    fun getAllCities(): Flowable<List<FavoriteCity>>
 
 }

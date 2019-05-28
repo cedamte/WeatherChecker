@@ -1,9 +1,9 @@
 package com.example.data.data
 
 import com.example.data.model.FavoriteCity
-import io.reactivex.Maybe
+import io.reactivex.Flowable
 
 interface LocalDataSource {
-    fun getAllCities(): Maybe<List<FavoriteCity>>
+    fun getAllCities(): Flowable<List<FavoriteCity>>
     fun addCity(favoriteCity: FavoriteCity)
 }

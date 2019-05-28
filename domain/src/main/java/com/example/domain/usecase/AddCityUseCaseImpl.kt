@@ -9,10 +9,8 @@ import javax.inject.Inject
 class AddCityUseCaseImpl @Inject constructor(private val citiesRepository: CitiesRepository) : AddCityUseCase {
     override fun execute(name: String): Observable<ScreenState> {
         return Observable.fromCallable {
-                citiesRepository.addCity(City(name = name, isFavorite = true))
-                ScreenState.Loading(false) as ScreenState }
-            .startWith { ScreenState.Loading(true) }
-
+            citiesRepository.addCity(City(name = name, isFavorite = true))
+            ScreenState.Loading(false) as ScreenState }
+            .doOnSubscribe { ScreenState.Loading(true) }
     }
-
 }
