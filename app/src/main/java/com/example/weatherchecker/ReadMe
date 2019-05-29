@@ -1,0 +1,9 @@
+Suggested Improvements With Time and Scope:
+1. Increased test coverage - unit tests for other repositories, usecases, viewmodels and instrumented tests for
+    activities utilising espresso and mockwebserver
+2. Refactoring direction determination logic to take advantage of Kotlin's Range and Version
+3. Dark theme to take leverage of Android Q
+4. Master-Design flow to support tablets more effectively
+5. Implementing in-memory cache although values are cached in Retrofit for API calls and Room for local storage
+6. Implementing showing current temperature for the saved cities - the setup is almost done, the models support holding
+this data, just need to implement API calls to retrieve them
