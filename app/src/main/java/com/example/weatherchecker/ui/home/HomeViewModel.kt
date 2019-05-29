@@ -54,6 +54,8 @@ class HomeViewModel(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { _homeScreenStateObservable.value = it }
                 .addTo(compositeDisposable)
+        } else if (::place.isInitialized) {
+            _homeScreenStateObservable.value = HomeScreenState.LaunchForecastActivity(extractCityAndCountry(place))
         }
     }
 
