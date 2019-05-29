@@ -44,7 +44,7 @@ class GetCitiesUseCaseTest {
     }
 
     @Test
-    fun `content event is dispatched when users are retrieved successfully`() {
+    fun `content event is dispatched when cities are retrieved successfully`() {
         val result = listOf(City("London", true))
         given(citiesRepository.getAllCities()).willReturn(Observable.just(result))
 
