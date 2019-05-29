@@ -32,9 +32,11 @@ class ForecastViewModel(private val getForecastUseCase: GetForecastUseCase) : Ba
             is ForecastScreenState.Content -> {
                 val forecastSummaryList = screenState.payload.map { it.toForecastSummary() }
                 _forecastViewStateObservable.value = ForecastViewState.Content(forecastSummaryList)
+                hideProgress()
             }
             is ScreenState.Error ->
                 _forecastViewStateObservable.value = ForecastViewState.Error(screenState.errorMessage)
+            is ScreenState.Loading -> if(screenState.isLoading) startProgress() else hideProgress()
         }
     }
 }

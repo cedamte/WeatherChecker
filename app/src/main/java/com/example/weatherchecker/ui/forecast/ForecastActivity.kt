@@ -25,6 +25,7 @@ class ForecastActivity : AppCompatActivity() {
         val forecastBinding = DataBindingUtil
             .setContentView<ActivityForecastBinding>(this, R.layout.activity_forecast)
         forecastBinding.lifecycleOwner = this
+        forecastBinding.viewModel = forecastViewModel
 
         val forecastAdapter = ForecastAdapter()
         rvForecast.layoutManager = LinearLayoutManager(this)

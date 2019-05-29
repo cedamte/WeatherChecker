@@ -30,7 +30,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:text="@{String.valueOf(forecastSummary.temperature)}"
+                android:text="@{@string/label_temp_c(forecastSummary.temperature)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.025"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,9 +43,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="@string/cd_wind_direction_icon"
                 app:cardinalDirection="@{forecastSummary.windDegrees}"
                 app:layout_constraintEnd_toEndOf="parent"
-
                 app:layout_constraintTop_toBottomOf="@+id/tvWindDirection"
                 app:srcCompat="@drawable/ic_next" />
 
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{forecastSummary.windSpeed}"
+                android:text="@{@string/label_wind(forecastSummary.windSpeed)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ivWindDirection"
                 tools:text="Wind Speed" />
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{String.valueOf(forecastSummary.windDegrees)}"
+                android:text="@{@string/label_wind_direction(String.valueOf(forecastSummary.windDegrees))}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Wind Direction" />

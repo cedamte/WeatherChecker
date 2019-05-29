@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.example.weatherchecker.ui.forecast.ForecastViewModel" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,6 +16,15 @@
         android:layout_height="match_parent"
         android:id="@+id/rvForecast"
         />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="5dp"
+            android:visibility="@{viewModel.progressObservable ? View.VISIBLE : View.GONE}"
+            tools:visibility="visible"
+            />
 
 </FrameLayout>
 </layout>

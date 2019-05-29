@@ -40,6 +40,6 @@
         android:contentDescription="@string/cd_favorite_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_next" />
+        app:srcCompat="@drawable/ic_favorite_red" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

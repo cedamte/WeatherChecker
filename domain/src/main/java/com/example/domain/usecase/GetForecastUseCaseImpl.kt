@@ -12,7 +12,6 @@ class GetForecastUseCaseImpl @Inject constructor(private val forecastRepository:
         return forecastRepository.getForecast(name)
             .map { if (it.isEmpty()) ScreenState.Empty else ForecastScreenState.Content(it) }
             .onErrorReturn { ScreenState.Error(it.message ?: "Unknown Error") }
-            .doOnTerminate { ScreenState.Loading(false) }
             .startWith(ScreenState.Loading(true))
     }
 

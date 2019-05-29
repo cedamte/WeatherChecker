@@ -4,4 +4,9 @@
     <string name="label_bottom_sheet_header">Would you like to add it to your favourites?</string>
     <string name="label_btn_save">Save</string>
     <string name="label_btn_ignore">Ignore</string>
+    <string name="cd_wind_direction_icon">An icon representing wind direction</string>
+
+    <string name="label_temp_c">%1$s °C</string>
+    <string name="label_wind">Wind Speed: %1$s km/h"</string>
+    <string name="label_wind_direction">Wind Direction: %1$s°</string>
 </resources>
