@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WeatherChecker</string>
+    <string name="cd_favorite_icon">An icon to represent the favorite city</string>
+    <string name="label_bottom_sheet_header">Would you like to add it to your favourites?</string>
+    <string name="label_btn_save">Save</string>
+    <string name="label_btn_ignore">Ignore</string>
 </resources>

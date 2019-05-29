@@ -15,6 +15,7 @@ import org.threeten.bp.Instant
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
 import java.text.DecimalFormat
+import kotlin.math.roundToLong
 
 fun Disposable.addTo(compositeDisposable: CompositeDisposable) {
     compositeDisposable.add(this)
@@ -29,10 +30,24 @@ fun ImageView.loadImageFromUrl(url: String?) {
     Picasso.get().load(url).into(this)
 }
 
+@BindingAdapter("cardinalDirection")
+fun ImageView.setIconForCardinalDirection(direction: Double) {
+    when (direction) {
+        in 0.01..89.99 -> //North East
+            this.animate().rotation(-45F).start()
+        in 90.01..179.99 -> //south East
+            this.animate().rotation(45F).start()
+        in 180.01..269.99 -> //South West
+            this.animate().rotation(135F).start()
+        in 270.01..359.99 -> //North West
+            this.animate().rotation(225F).start()
+    }
+}
+
 fun Int.getReadableTimeFromEpoch(): String {
     val localDateTime = Instant.ofEpochSecond(this.toLong()).atZone(ZoneId.systemDefault())
         .toLocalDateTime()
-    return localDateTime.format(DateTimeFormatter.ofPattern("HH:mm a"))
+    return localDateTime.format(DateTimeFormatter.ofPattern("EE hh:mm a"))
 }
 
 fun Double.getCentigradeFromKelvin(): String {
@@ -44,8 +59,8 @@ fun Forecast.toForecastSummary(): ForecastSummary {
     return with(this) {
         ForecastSummary(
             temperature = temperatureInKelvin.getCentigradeFromKelvin(),
-            windDegrees = windDegrees,
-            windSpeed = (windSpeed * 3.6).toString(),
+            windDegrees = "%.2f".format(windDegrees).toDouble(),
+            windSpeed = "%.2f".format(windSpeed * 3.6),
             condition = condition,
             date = time.getReadableTimeFromEpoch()
         )
